@@ -1,0 +1,160 @@
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #59A5D8 0%, #4A90C2 100%);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white !important;
+    letter-spacing: 1px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px 45px 10px 15px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5px;
+    background: #59A5D8;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn:hover {
+    background: #4A90C2;
+}
+
+.cart-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.cart-link:hover {
+    color: white;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #59A5D8 0%, #4A90C2 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.products-container {
+    padding: 2rem 0;
+}
+
+.medicine-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    overflow: hidden;
+}
+
+.medicine-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.medicine-image {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.medicine-name {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.medicine-name:hover {
+    color: #59A5D8;
+}
+
+.add-to-cart-btn {
+    background: linear-gradient(135deg, #59A5D8 0%, #4A90C2 100%);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+    color: white;
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.section-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.no-products {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        width: 200px;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+}
