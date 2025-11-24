@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-    <!-- Navigation -->
+
     <nav class="navbar">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
@@ -20,31 +21,41 @@
                     <i class="fas fa-pills me-2"></i>
                     MEDILINE
                 </a>
-                
+
                 <div class="search-container">
                     <form action="#" method="post" class="search-form">
                         {% csrf_token %}
-                        <input class="search-input" name="query" type="search" placeholder="Search medicines..." aria-label="Search">
+                        <input class="search-input" name="query" type="search" placeholder="Search medicines..."
+                            aria-label="Search">
                         <button type="submit" class="search-btn" aria-label="Search">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
-                    
+
                     <a href="{% url 'vcart' %}" class="cart-link" title="View Cart">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" id="logoutbtn">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}" id="loginbtn">Login</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+
     <div class="hero-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <h1 class="mb-3">Your Trusted Online Pharmacy</h1>
-                    <p class="mb-0 opacity-75">Quality medicines delivered to your doorstep with expert care and consultation.</p>
+                    <p class="mb-0 opacity-75">Quality medicines delivered to your doorstep with expert care and
+                        consultation.</p>
                 </div>
                 <div class="col-md-4 text-center">
                     <i class="fas fa-heartbeat fa-5x opacity-50"></i>
@@ -53,7 +64,7 @@
         </div>
     </div>
 
-    <!-- Products Section -->
+
     <div class="container products-container">
         {% if meds %}
         <div class="row g-4">
@@ -61,53 +72,53 @@
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="medicine-card">
                     {% if med.image %}
-                        <img class="medicine-image" src="{{ med.image.url }}" alt="{{ med.name }}">
+                    <a href="{% url 'prod_details' med.id%}"> <img class="medicine-image" src="{{ med.image.url }}"
+                            alt="{{ med.name }}"> </a>
                     {% else %}
-                        <div class="medicine-image bg-light d-flex align-items-center justify-content-center">
-                            <i class="fas fa-pills fa-3x text-muted"></i>
-                        </div>
+                    <div class="medicine-image bg-light d-flex align-items-center justify-content-center">
+                        <i class="fas fa-pills fa-3x text-muted"></i>
+                    </div>
                     {% endif %}
-                    
+
                     <div class="card-body">
                         <a href="{% url 'prod_details' med.id %}" class="medicine-name">
                             <h5 class="mb-0">{{ med.name }}</h5>
                         </a>
-                        
-                        
+
+
                         <p class="text-muted small mb-3">
                             {{ med.description|truncatewords:8 }}
                         </p>
-                      
-                        
-                       
+
+
+
                         <div class="mb-3">
                             <span class="fw-bold" style="color: #59A5D8; font-size: 1.2rem;">
                                 ₹{{ med.price }}
                             </span>
                         </div>
-                       
-                        
+
+
+
                         <div class="d-grid">
-                            <a href="{% url 'addtocart' med.id %}" class="btn add-to-cart-btn">
-                                <i class="fas fa-cart-plus me-2"></i>
-                                Add to Cart
-                            </a>
+                            <form method="post" action="{% url 'add_to_cart' med.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="add-to-cart-btn" id="addToCartBtn">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
+                            </form>
+
                         </div>
-                        
-                       
-                        <small class="text-muted mt-2 d-block text-center">
-                            <i class="fas fa-check-circle me-1"></i>
-                            {{ med.qty }} in stock
-                        </small>
-                        
+
+
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        
+
         {% else %}
-        
+
         <div class="no-products">
             <i class="fas fa-pills fa-5x mb-4 text-muted"></i>
             <h3 class="mb-3">No medicines available</h3>
@@ -116,7 +127,7 @@
         {% endif %}
     </div>
 
- 
+
     <footer class="mt-5 py-4" style="background-color: #2c3e50; color: white;">
         <div class="container">
             <div class="row">
@@ -143,4 +154,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

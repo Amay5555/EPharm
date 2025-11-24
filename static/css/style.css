@@ -158,3 +158,42 @@ body {
         font-size: 1.8rem;
     }
 }
+
+#logoutbtn button {
+    background-color: #4A90C2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+#logoutbtn button:hover {
+    color: white;
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#loginbtn button {
+    background-color: #4A90C2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+#loginbtn button:hover {
+    color: white;
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+

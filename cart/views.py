@@ -1,12 +1,13 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from store.models import Meds
 from .models import CartItems,Cart
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F
 from accounts.models import UserProfile
+from django.contrib import messages
 
 
-# @login_required
+@login_required
 def viewCart(request):
     user , _ = UserProfile.objects.get_or_create(user = request.user)
     cart , created = Cart.objects.get_or_create( user = user)
@@ -18,16 +19,27 @@ def viewCart(request):
     }
     return render(request , 'view_cart.html', context)
 
-# @login_required
-def addToCart(request , pk):
-    med = get_object_or_404(Meds ,pk = pk)
-    user , _ = UserProfile.objects.get_or_create(user = request.user)
-    cart , _ = Cart.objects.get_or_create(user=user)
-    cart_item, created = CartItems.objects.get_or_create (cart = cart , product = med)
-    if not created: 
-        cart_item.quantity += 1 
+@login_required
+def addToCart(request, pk):
+    med = get_object_or_404(Meds, pk=pk)
+    user_profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    cart, _ = Cart.objects.get_or_create(user=user_profile)
+    if request.method == 'POST':
+        quantity_str = request.POST.get('quantity', '1')
+        try:
+            quantity = int(quantity_str)
+        except ValueError:
+            quantity = 1
+        quantity = max(1, min(quantity, med.qty))
+        cart_item, _ = CartItems.objects.get_or_create(cart=cart, product=med)
+        cart_item.quantity = quantity
+
+        if cart_item.quantity > med.qty:
+            cart_item.quantity = med.qty        
         cart_item.save()
-    return redirect ('home')
+        return redirect('vcart')
+
+    return redirect('home')
 
 def updateCartItem(request, pk):
     if request.method == 'POST':

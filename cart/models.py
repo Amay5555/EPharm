@@ -7,5 +7,5 @@ class Cart(models.Model):
 
 class CartItems(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
-    product = models.ForeignKey(Meds , on_delete=models.SET_NULL , null=True)
+    product = models.ForeignKey(Meds , on_delete=models.SET_NULL , null=True, related_name='cprod')
     quantity = models.PositiveIntegerField(default=1)
